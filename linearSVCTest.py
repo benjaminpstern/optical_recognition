@@ -29,5 +29,7 @@ def main():
     p = Picture("training_data/b3.png")
     c = Char_Repr(p)
     print(s.predict([c.points]))
+    c.pic.display()
+    raw_input()
 
 main()
