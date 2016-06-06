@@ -1,6 +1,6 @@
 from math import sin, cos, pi, sqrt
-from preprocessing import blur
-def is_dark(pic, x, y, threshold=150):
+from preprocessing import preprocess
+def is_dark(pic, x, y, threshold=180):
     r = pic.getPixelRed(x,y)
     g = pic.getPixelBlue(x,y)
     b = pic.getPixelGreen(x,y)
@@ -14,7 +14,7 @@ class Char_Repr:
             xend=pic.width
         if not yend:
             yend=pic.height
-        self.pic = blur(pic)
+        self.pic = preprocess(pic)
         self.xstart = xstart
         self.ystart = ystart
         self.xend = xend
@@ -27,7 +27,7 @@ class Char_Repr:
     def gen_repr(self):
         self.xcenter, self.ycenter = self.center_of_mass()
         self.pic.setPenColor(0, 0, 255)
-        # self.pic.drawCircleFill(self.xcenter, self.ycenter, 5)
+        self.pic.drawCircleFill(self.xcenter, self.ycenter, 5)
         for angle in range(0, 360, self.stepsize):
             points_for_angle = self.find_points(angle)
             while len(points_for_angle) < 2 * self.max_lines:
@@ -89,12 +89,12 @@ class Char_Repr:
                 if not is_dark(self.pic, cur_pos_x, cur_pos_y):
                     in_line = False
                     points.append(self.distance(cur_pos_x, cur_pos_y))
-                    # self.pic.drawCircleFill(cur_pos_x, cur_pos_y, 2)
+                    self.pic.drawCircleFill(cur_pos_x, cur_pos_y, 2)
             else:
                 if is_dark(self.pic, cur_pos_x, cur_pos_y):
                     in_line = True
                     points.append(self.distance(cur_pos_x, cur_pos_y))
-                    # self.pic.drawCircleFill(cur_pos_x, cur_pos_y, 2)
+                    self.pic.drawCircleFill(cur_pos_x, cur_pos_y, 2)
             cur_pos_x += 3 * cos(angle_rads)
             cur_pos_y += 3 * sin(angle_rads)
         return points

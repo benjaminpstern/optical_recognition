@@ -7,12 +7,12 @@ def main():
     X = []
     y = []
     for num in range(1, 4):
-        p = Picture("training_data/a" + str(num)+".png")
+        p = Picture("training_data/marker/a" + str(num)+".jpg")
         c = Char_Repr(p)
         X.append(c.points)
 
     for num in range(1, 4):
-        p = Picture("training_data/b" + str(num)+".png")
+        p = Picture("training_data/marker/b" + str(num)+".jpg")
         c = Char_Repr(p)
         X.append(c.points)
 
@@ -23,7 +23,10 @@ def main():
     s = LinearSVC()
     s.fit(X, y)
 
-    p = Picture("training_data/b7.png")
+    p = Picture("training_data/marker/a4.jpg")
+    c = Char_Repr(p)
+    print(s.predict([c.points]))
+    p = Picture("training_data/marker/b4.jpg")
     c = Char_Repr(p)
     print(s.predict([c.points]))
 
