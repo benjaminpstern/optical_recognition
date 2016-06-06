@@ -1,0 +1,5 @@
+Optical Character Recognition project
+
+Requirements: pillow, numpy, scipy, matplotlib, scikit-learn on python2
+
+To recognize a character, create a Picture object of it using the picture class and make a Char_Repr object using that picture. then use scikit-learn to train on a data set and recognize characters. For an example see linearSVCTest.py
