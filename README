@@ -1,0 +1,17 @@
+Optical Character Recognition project
+
+This is a project I'm doing to test a new algorithm for recognizing characters:
+
+suppose you have an image of a character, how do you represent it? Most programs either divide the pixels into grid sections and store the average darkness of each section or try to identify features in the character.
+
+This algorithm seeks to use a representation that correlates more closely with the features we see as humans.
+
+The idea is that if we draw a line from the center of mass of an o along any direction(making an angle theta with the horizontal), it will intersect the o an equal distance away no matter how you change theta.
+But if we do this for a b, we will intersect the stem at an angle around 120 degrees, as well as the loop.
+If we do this for a c, we won't intersect between about -30 and +30 degrees. This information is fast to store, fast to find, and is much more handwriting-independent than pixel grids.
+
+
+
+Requirements: pillow, numpy, scipy, matplotlib, scikit-learn on python2
+
+To recognize a character, create a Picture object of it using the picture class and make a Char_Repr object using that picture. then use scikit-learn to train on a data set and recognize characters. For an example see linearSVCTest.py
