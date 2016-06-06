@@ -1,4 +1,5 @@
 from math import sin, cos, pi, sqrt
+from preprocessing import blur
 def is_dark(pic, x, y, threshold=150):
     r = pic.getPixelRed(x,y)
     g = pic.getPixelBlue(x,y)
@@ -13,7 +14,7 @@ class Char_Repr:
             xend=pic.width
         if not yend:
             yend=pic.height
-        self.pic = pic
+        self.pic = blur(pic)
         self.xstart = xstart
         self.ystart = ystart
         self.xend = xend
@@ -43,7 +44,10 @@ class Char_Repr:
             if point != -1:
                 total += point
                 counts += 1
-        return total / counts
+        if counts:
+            return total / counts
+        else:
+            return 1
 
     def normalize(self):
         avg = self.point_average()
