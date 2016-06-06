@@ -43,7 +43,10 @@ class Char_Repr:
             if point != -1:
                 total += point
                 counts += 1
-        return total / counts
+        if counts:
+            return total / counts
+        else:
+            return 1
 
     def normalize(self):
         avg = self.point_average()
